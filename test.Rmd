@@ -50,4 +50,15 @@ seq(1,20,1)
 seq(2,by = 2, length.out = 20)
 round(seq(17,98, length.out = 30),4)
 
+x = c(41,2,378,43,5,65,7,28,39)
+
+rev(sort(x))
+
+sort(rev(x))
+
+
+?sort
+
+sort(x, decreasing = TRUE)
+
 

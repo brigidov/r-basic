@@ -1,0 +1,1216 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  ignorenonframetext,
+]{beamer}
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{part title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Tema 3 - Estructuras de datos},
+  pdfauthor={Juan Gabriel Gomila \& María Santos},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\newif\ifbibliography
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Tema 3 - Estructuras de datos}
+\author{Juan Gabriel Gomila \& María Santos}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+
+\hypertarget{vectores}{%
+\section{Vectores}\label{vectores}}
+
+\begin{frame}[fragile]{Tipos de datos en R}
+\protect\hypertarget{tipos-de-datos-en-r}{}
+
+Un \textbf{vector} es una secuencia ordenada de datos. \texttt{R}
+dispone de muchos tipos de datos, por ejemplo:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{logical}: lógicos (\texttt{TRUE} o \texttt{FALSE})
+\item
+  \texttt{integer}: números enteros, \(\mathbb Z\)
+\item
+  \texttt{numeric}: números reales, \(\mathbb R\)
+\item
+  \texttt{complex}: números complejos, \(\mathbb C\)
+\item
+  \texttt{character}: palabras
+\end{itemize}
+
+En los vectores de \texttt{R}, todos sus objetos han de ser del mismo
+tipo: todos números, todos palabras, etc. Cuando queramos usar vectores
+formados por objetos de diferentes tipos, tendremos que usar
+\textbf{listas generalizadas}, \texttt{lists} que veremos al final del
+tema.
+
+\end{frame}
+
+\begin{frame}[fragile]{Básico}
+\protect\hypertarget{buxe1sico}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{c()}: para definir un vector
+\item
+  \texttt{scan()}: para definir un vector
+\item
+  \texttt{fix(x)}: para modificar visualmente el vector \(x\)
+\item
+  \texttt{rep(a,n)}: para definir un vector constante que contiene el
+  dato \(a\) repetido \(n\) veces
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1 2 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rep}\NormalTok{(}\StringTok{"Mates"}\NormalTok{,}\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "Mates" "Mates" "Mates" "Mates" "Mates" "Mates" "Mates"
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}{Función scan()}
+\protect\hypertarget{funciuxf3n-scan}{}
+
+\textbf{Ejemplo}
+
+Vamos a crear un vector que contenga 3 copias de 1 9 9 8 0 7 2 6 con la
+función scan:
+
+\includegraphics{Imgs/scan.png}
+
+\end{frame}
+
+\begin{frame}{Básico}
+\protect\hypertarget{buxe1sico-1}{}
+
+\textbf{Ejercicio}
+
+\begin{enumerate}
+\tightlist
+\item
+  Repite tu año de nacimiento 10 veces 
+\item
+  Crea el vector que tenga como entradas
+  \(16, 0, 1, 20, 1, 7, 88, 5, 1, 9\), llámalo vec y modifica la cuarta
+  entrada con la función fix() 
+\end{enumerate}
+
+\includegraphics{Imgs/studytime.png}
+
+\end{frame}
+
+\begin{frame}[fragile]{Progresiones y Secuencias}
+\protect\hypertarget{progresiones-y-secuencias}{}
+
+Una progresión aritmética es una sucesión de números tales que la
+\textbf{diferencia}, \(d\), de cualquier par de términos sucesivos de la
+secuencia es constante. \[a_n = a_1 + (n-1)\cdot d\]
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{seq(a,b,by=d)}: para generar una
+  \href{https://es.wikipedia.org/wiki/Progresión_aritmética}{progresión
+  aritmética} de diferencia \(d\) que empieza en \(a\) hasta llegar a
+  \(b\)
+\item
+  \texttt{seq(a,b,\ length.out=n)}: define progresión aritmética de
+  longitud \(n\) que va de \(a\) a \(b\) con diferencia \(d\). Por tanto
+  \(d=(b-a)/(n-1)\)
+\item
+  \texttt{seq(a,by=d,\ length.out=n)}: define la progresión aritmética
+  de longitud \(n\) y diferencia \(d\) que empieza en \(a\)
+\item
+  \texttt{a:b}: define la secuencia de números \textbf{enteros}
+  (\(\mathbb{Z}\)) consecutivos entre dos números \(a\) y \(b\)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Secuencias}
+\protect\hypertarget{secuencias}{}
+
+\textbf{Ejercicio}
+
+\begin{itemize}
+\tightlist
+\item
+  Imprimid los números del 1 al 20 
+\item
+  Imprimid los 20 primeros números pares 
+\item
+  Imprimid 30 números equidistantes entre el 17 y el 98, mostrando solo
+  4 cifras significativas 
+\end{itemize}
+
+\includegraphics{Imgs/studytime.png}
+
+\end{frame}
+
+\begin{frame}[fragile]{Funciones}
+\protect\hypertarget{funciones}{}
+
+Cuando queremos aplicar una función a cada uno de los elementos de un
+vector de datos, la función \texttt{sapply} nos ahorra tener que
+programar con bucles en \texttt{R}:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{sapply(nombre\_de\_vector,FUN=nombre\_de\_función)}: para
+  aplicar dicha función a todos los elementos del vector
+\item
+  \texttt{sqrt(x)}: calcula un nuevo vector con las raíces cuadradas de
+  cada uno de los elementos del vector \(x\)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Funciones}
+\protect\hypertarget{funciones-1}{}
+
+Dado un vector de datos \(x\) podemos calcular muchas medidas
+estadísticas acerca del mismo:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{length(x)}: calcula la longitud del vector \(x\)
+\item
+  \texttt{max(x)}: calcula el máximo del vector \(x\)
+\item
+  \texttt{min(x)}: calcula el mínimo del vector \(x\)
+\item
+  \texttt{sum(x)}: calcula la suma de las entradas del vector \(x\)
+\item
+  \texttt{prod(x)}: calcula el producto de las entradas del vector \(x\)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Funciones}
+\protect\hypertarget{funciones-2}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{mean(x)}: calcula la media aritmética de las entradas del
+  vector \(x\)
+\item
+  \texttt{diff(x)}: calcula el vector formado por las diferencias
+  sucesivas entre entradas del vector original \(x\)
+\item
+  \texttt{cumsum(x)}: calcula el vector formado por las sumas acumuladas
+  de las entradas del vector original \(x\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Permite definir sucesiones descritas mediante sumatorios
+  \item
+    Cada entrada de \texttt{cumsum(x)} es la suma de las entradas de
+    \(x\) hasta su posición
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Funciones}
+\protect\hypertarget{funciones-3}{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cuadrado =}\StringTok{ }\ControlFlowTok{function}\NormalTok{(x)\{x}\OperatorTok{^}\DecValTok{2}\NormalTok{\}}
+\NormalTok{v =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{)}
+\KeywordTok{sapply}\NormalTok{(v, }\DataTypeTok{FUN =}\NormalTok{ cuadrado)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  1  4  9 16 25 36
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{mean}\NormalTok{(v)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{cumsum}\NormalTok{(v)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  1  3  6 10 15 21
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{Orden}
+\protect\hypertarget{orden}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{sort(x)}: ordena el vector en orden natural de los objetos que
+  lo forman: el orden numérico creciente, orden alfabético\ldots{}
+\item
+  \texttt{rev(x)}: invierte el orden de los elementos del vector \(x\)
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{3}\NormalTok{)}
+\KeywordTok{sort}\NormalTok{(v)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1 2 3 4 5 6 7
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rev}\NormalTok{(v)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3 6 4 2 5 7 1
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{Orden}
+\protect\hypertarget{orden-1}{}
+
+\textbf{Ejercicio}
+
+\begin{itemize}
+\item
+  Combinad las dos funciones anteriores, \texttt{sort} y \texttt{rev}
+  para crear una función que dado un vector \(x\) os lo devuelva
+  ordenado en orden decreciente.
+\item
+  Razonad si aplicar primero \texttt{sort} y luego \texttt{rev} a un
+  vector \(x\) daría en general el mismo resultado que aplicar primero
+  \texttt{rev} y luego \texttt{sort}.
+\item
+  Investigad la documentación de la función \texttt{sort} (recordad que
+  podéis usar la sintaxis \texttt{?sort} en la consola) para leer si
+  cambiando algún argumento de la misma podéis obtener el mismo
+  resultado que habéis programado en el primer ejercicio.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Subvectores}
+\protect\hypertarget{subvectores}{}
+
+\begin{itemize}
+\item
+  \texttt{vector{[}i{]}}: da la \(i\)-ésima entrada del vector
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Los índices en R empiezan en 1
+  \item
+    \texttt{vector{[}length(vector){]}}: nos da la última entrada del
+    vector
+  \item
+    \texttt{vector{[}a:b{]}}: si \(a\) y \(b\) son dos números
+    naturales, nos da el subvector con las entradas del vector original
+    que van de la posición \(a\)-ésima hasta la \(b\)-ésima.
+  \item
+    \texttt{vector{[}-i{]}}: si \(i\) es un número, este subvector está
+    formado por todas las entradas del vector original menos la entrada
+    \(i\)-ésima. Si \(i\) resulta ser un vector, entonces es un vector
+    de índices y crea un nuevo vector con las entradas del vector
+    original,cuyos índices pertenecen a \(i\)
+  \item
+    \texttt{vector{[}-x{]}}: si \(x\) es un vector (de índices),
+    entonces este es el complementario de vector{[}\(x\){]}
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Subvectores}
+\protect\hypertarget{subvectores-1}{}
+
+\begin{itemize}
+\item
+  También podemos utilizar operadores lógicos:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{==}: =
+  \item
+    \texttt{!=}: \(\neq\)
+  \item
+    \texttt{\textgreater{}=}: \(\ge\)\\
+  \item
+    \texttt{\textless{}=}: \(\le\)
+  \item
+    \texttt{\textless{}}: \(<\)
+  \item
+    \texttt{\textgreater{}}: \(>\)
+  \item
+    \texttt{!}: NO lógico
+  \item
+    \texttt{\&}: Y lógico
+  \item
+    \texttt{\textbar{}}: O lógico
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Subvectores}
+\protect\hypertarget{subvectores-2}{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{14}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{19}\NormalTok{,}\DecValTok{32}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{8}\NormalTok{)}
+\NormalTok{v[}\DecValTok{2}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v[}\OperatorTok{-}\KeywordTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{5}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 14  5 19  0  8
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{v[v }\OperatorTok{!=}\StringTok{ }\DecValTok{19} \OperatorTok{&}\StringTok{ }\NormalTok{v}\OperatorTok{>}\DecValTok{15}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 32
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{Condicionales}
+\protect\hypertarget{condicionales}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{which(x\ cumple\ condición)}: para obtener los índices de las
+  entradas del vector \(x\) que satisfacen la condición dada
+\item
+  \texttt{which.min(x)}: nos da la primera posición en la que el vector
+  \(x\) toma su valor mínimo
+\item
+  \texttt{which(x==min(x))}: da todas las posiciones en las que el
+  vector \(x\) toma sus valores mínimos
+\item
+  \texttt{which.max(x)}: nos da la primera posición en la que el vector
+  \(x\) toma su valor máximo
+\item
+  \texttt{which(x==max(x))}: da todas las posiciones en las que el
+  vector \(x\) toma sus valores máximos
+\end{itemize}
+
+\end{frame}
+
+\hypertarget{factores}{%
+\section{Factores}\label{factores}}
+
+\begin{frame}[fragile]{Factor}
+\protect\hypertarget{factor}{}
+
+Factor: es como un vector, pero con una estructura interna más rica que
+permite usarlo para clasificar observaciones
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{levels}: atributo del factor. Cada elemento del factor es
+  igual a un nivel. Los niveles clasifican las entradas del factor. Se
+  ordenan por orden alfabético
+\item
+  Para definir un factor, primero hemos de definir un vector y
+  trasformarlo por medio de una de las funciones \texttt{factor()} o
+  \texttt{as.factor()}.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{La función factor()}
+\protect\hypertarget{la-funciuxf3n-factor}{}
+
+\begin{itemize}
+\item
+  \texttt{factor(vector,levels=...)}: define un factor a partir del
+  vector y dispone de algunos parámetros que permiten modificar el
+  factor que se crea:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{levels}: permite especificar los niveles e incluso añadir
+    niveles que no aparecen en el vector
+  \item
+    \texttt{labels}: permite cambiar los nombres de los niveles
+  \end{itemize}
+\item
+  \texttt{levels(factor)}: para obtener los niveles del factor
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Factor ordenado}
+\protect\hypertarget{factor-ordenado}{}
+
+Factor ordenado. Es un factor donde los niveles siguen un orden
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{ordered(vector,levels=...)}: función que define un factor
+  ordenado y tiene los mismos parámetros que factor
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Factores y factores ordenados}
+\protect\hypertarget{factores-y-factores-ordenados}{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fac =}\StringTok{ }\KeywordTok{factor}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{), }
+       \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Sus"}\NormalTok{,}\StringTok{"Apr"}\NormalTok{,}\StringTok{"Not"}\NormalTok{,}\StringTok{"Exc"}\NormalTok{))}
+\NormalTok{fac}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] Sus Sus Sus Apr Apr Not Apr Exc Sus Not Not Exc Apr Not Exc Exc
+Levels: Sus Apr Not Exc
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{facOrd =}\StringTok{ }\KeywordTok{ordered}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{4}\NormalTok{), }
+       \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{), }\DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Sus"}\NormalTok{,}\StringTok{"Apr"}\NormalTok{,}\StringTok{"Not"}\NormalTok{,}\StringTok{"Exc"}\NormalTok{))}
+\NormalTok{facOrd}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+ [1] Sus Sus Sus Apr Apr Not Apr Exc Sus Not Not Exc Apr Not Exc Exc
+Levels: Sus < Apr < Not < Exc
+\end{verbatim}
+
+\end{frame}
+
+\hypertarget{lists}{%
+\section{Lists}\label{lists}}
+
+\begin{frame}[fragile]{List}
+\protect\hypertarget{list}{}
+
+List. Lista formada por diferentes objetos, no necesariamente del mismo
+tipo, cada cual con un nombre interno
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{list(...)}: función que crea una list
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Para obtener una componente concreta usamos la instrucción
+    \texttt{list\$componente}
+  \item
+    También podemos indicar el objeto por su posición usando dobles
+    corchetes: \texttt{list{[}{[}i{]}{]}}. Lo que obtendremos es una
+    list formada por esa única componente, no el objeto que forma la
+    componente
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Obtener información de una list}
+\protect\hypertarget{obtener-informaciuxf3n-de-una-list}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{str(list)}: para conocer la estructura interna de una list
+\item
+  \texttt{names(list)}: para saber los nombres de la list
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Obtener información de una list}
+\protect\hypertarget{obtener-informaciuxf3n-de-una-list-1}{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\OperatorTok{-}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\OperatorTok{-}\DecValTok{8}\NormalTok{,}\OperatorTok{-}\DecValTok{9}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{miLista =}\StringTok{ }\KeywordTok{list}\NormalTok{(}\DataTypeTok{nombre =} \StringTok{"X"}\NormalTok{, }\DataTypeTok{vector =}\NormalTok{ x, }\DataTypeTok{media =} \KeywordTok{mean}\NormalTok{(x), }\DataTypeTok{sumas =} \KeywordTok{cumsum}\NormalTok{(x))}
+\NormalTok{miLista}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+$nombre
+[1] "X"
+
+$vector
+ [1]  1 -2  3  4 -5  6  7 -8 -9  0
+
+$media
+[1] -0.3
+
+$sumas
+ [1]  1 -1  2  6  1  7 14  6 -3 -3
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{Obtener información de una list}
+\protect\hypertarget{obtener-informaciuxf3n-de-una-list-2}{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(miLista)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+List of 4
+ $ nombre: chr "X"
+ $ vector: num [1:10] 1 -2 3 4 -5 6 7 -8 -9 0
+ $ media : num -0.3
+ $ sumas : num [1:10] 1 -1 2 6 1 7 14 6 -3 -3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{names}\NormalTok{(miLista)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] "nombre" "vector" "media"  "sumas" 
+\end{verbatim}
+
+\end{frame}
+
+\hypertarget{matrices}{%
+\section{Matrices}\label{matrices}}
+
+\begin{frame}[fragile]{Cómo definirlas}
+\protect\hypertarget{cuxf3mo-definirlas}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{matrix(vector,\ nrow=n,\ byrow=valor\_lógico)}: para definir
+  una matriz de \(n\) filas formada por las entradas del vector
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{nrow}: número de filas
+  \item
+    \texttt{byrow}: si se iguala a TRUE, la matriz se construye por
+    filas; si se iguala a FALSE (valor por defecto), se construye por
+    columnas. -\texttt{ncol}: número de columnas (puede usarse en lugar
+    de nrow)
+  \item
+    R muestra las matrices indicando como {[}\(i,\){]} la fila
+    \(i\)-ésima y {[}\(,j\){]} la columna \(j\)-ésima
+  \item
+    Todas las entradas de una matriz han de ser del mismo tipo de datos
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Cómo definirlas}
+\protect\hypertarget{cuxf3mo-definirlas-1}{}
+
+\textbf{Ejercicio}
+
+\begin{itemize}
+\item
+  ¿Cómo definirías una matriz constante? Es decir, ¿cómo definirías una
+  matriz \(A\) tal que \(\forall\  i=1,...,n; j = 1,...,m\),
+  \(a_{i,j}=k\) siendo \(k\in\mathbb{R}\)? Como R no admite incógnitas,
+  prueba para el caso específico \(n = 3, m = 5, k = 0\) 
+\item
+  Con el vector vec = (1,2,3,4,5,6,7,8,9,10,11,12) crea la matriz
+  \[\begin{pmatrix}
+  1 & 4 & 7 & 10\\
+  2 & 5 & 8 & 11\\
+  3 & 6 & 9 & 12
+  \end{pmatrix}\] 
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Cómo construirlas}
+\protect\hypertarget{cuxf3mo-construirlas}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{rbind(vector1,\ vector2,\ ...)}: construye la matriz de filas
+  vector1, vector2,\ldots{}
+\item
+  \texttt{cbind(vector1,\ vector2,\ ...)}: construye la matriz de
+  columnas vector1, vector2,\ldots{}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Los vectores han de tener la misma longitud
+  \item
+    También sirve para añadir columnas (filas) a una matriz o concatenar
+    por columnas (filas) matrices con el mismo número de filas
+    (columnas)
+  \end{itemize}
+\item
+  \texttt{diag(vector)}: para construir una matriz diagonal con un
+  vector dado
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Si aplicamos diag a un número \(n\), produce una matriz identidad de
+    orden \(n\)
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Submatrices}
+\protect\hypertarget{submatrices}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{matriz{[}i,j{]}}: indica la entrada (\(i,j\)) de la matriz,
+  siendo \(i,j\in\mathbb{N}\). Si \(i\) y \(j\) son vectores de índices,
+  estaremos definiendo la submatriz con las filas pertenecientes al
+  vector \(i\) y columnas pertenecientes al vector \(j\)
+\item
+  \texttt{matriz{[}i,{]}}: indica la fila \(i\)-ésima de la matriz,
+  siendo \(i\in\mathbb{N}\)
+\item
+  \texttt{matriz{[},j{]}}: indica la columna \(j\)-ésima de la siendo
+  \(j\in\mathbb{N}\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Si \(i\) (\(j\)) es un vector de índices, estaremos definiendo la
+    submatriz con las filas (columnas) pertenecientes al vector \(i\)
+    (\(j\))
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Funciones}
+\protect\hypertarget{funciones-4}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{diag(matriz)}: para obtener la diagonal de la matriz
+\item
+  \texttt{nrow(matriz)}: nos devuelve el número de filas de la matriz
+\item
+  \texttt{ncol(matriz)}: nos devuelve el número de columnas de la matriz
+\item
+  \texttt{dim(matriz)}: nos devuelve las dimensiones de la matriz
+\item
+  \texttt{sum(matriz)}: obtenemos la suma de todas las entradas de la
+  matriz
+\item
+  \texttt{prod(matriz)}: obtenemos el producto de todas las entradas de
+  la matriz
+\item
+  \texttt{mean(matriz)}: obtenemos la media aritmética de todas las
+  entradas de la matriz
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Funciones}
+\protect\hypertarget{funciones-5}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{colSums(matriz)}: obtenemos las sumas por columnas de la
+  matriz
+\item
+  \texttt{rowSums(matriz)}: obtenemos las sumas por filas de la matriz
+\item
+  \texttt{colMeans(matriz)}: obtenemos las medias aritméticas por
+  columnas de la matriz
+\item
+  \texttt{rowMeans(matriz)}: obtenemos las medias aritméticas por filas
+  de la matriz
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Funciones}
+\protect\hypertarget{funciones-6}{}
+
+\textbf{Ejemplo}
+
+Dada la matriz \[A = \begin{pmatrix}
+1 & 4 & 7\\
+2 & 5 & 8\\
+3 & 6 & 9
+\end{pmatrix}\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{A =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{5}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{7}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{9}\NormalTok{), }\DataTypeTok{ncol =} \DecValTok{3}\NormalTok{)}
+\KeywordTok{dim}\NormalTok{(A)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 3 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{diag}\NormalTok{(A)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 1 5 9
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{Función apply()}
+\protect\hypertarget{funciuxf3n-apply}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{apply(matriz,\ MARGIN=...,\ FUN=función)}: para aplicar otras
+  funciones a las filas o las columnas de una matriz
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{MARGIN}: ha de ser 1 si queremos aplicar la función por
+    filas; 2 si queremos aplicarla por columnas; o c(1,2) si la queremos
+    aplicar a cada entrada
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Función apply()}
+\protect\hypertarget{funciuxf3n-apply-1}{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{apply}\NormalTok{(A, }\DataTypeTok{MARGIN =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{), }\DataTypeTok{FUN =}\NormalTok{ cuadrado)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+     [,1] [,2] [,3]
+[1,]    1   16   49
+[2,]    4   25   64
+[3,]    9   36   81
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{apply}\NormalTok{(A, }\DataTypeTok{MARGIN =} \DecValTok{1}\NormalTok{, }\DataTypeTok{FUN =}\NormalTok{ sum)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 12 15 18
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{apply}\NormalTok{(A, }\DataTypeTok{MARGIN =} \DecValTok{2}\NormalTok{, }\DataTypeTok{FUN =}\NormalTok{ sum)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1]  6 15 24
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}[fragile]{Operaciones}
+\protect\hypertarget{operaciones}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{t(matriz)}: para obtener la transpuesta de la matriz
+\item
+  \texttt{+}: para sumar matrices
+\item
+  \texttt{*}: para el producto de un escalar por una matriz
+\item
+  \texttt{\%*\%}: para multiplicar matrices
+\item
+  \texttt{mtx.exp(matriz,n)}: para elevar la matriz a \(n\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Del paquete \texttt{Biodem}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      No calcula las potencias exactas, las aproxima
+    \end{itemize}
+  \end{itemize}
+\item
+  \texttt{\%\^{}\%}: para elevar matrices
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Del paquete \texttt{expm}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      No calcula las potencias exactas, las aproxima
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Operaciones}
+\protect\hypertarget{operaciones-1}{}
+
+\textbf{Ejercicio}
+
+Observad qué ocurre si, siendo
+\(A = \begin{pmatrix} 2 & 0 & 2\\ 1 & 2 & 3\\ 0 & 1 & 3 \end{pmatrix}\)
+y
+\(B = \begin{pmatrix} 3 & 2 & 1\\ 1 & 0 & 0\\ 1 & 1 & 1 \end{pmatrix}\),
+realizamos las operaciones \(A*B\), \(A^2\) y \(B^3\)
+
+\includegraphics{Imgs/studytime.png}
+
+\end{frame}
+
+\begin{frame}[fragile]{Operaciones}
+\protect\hypertarget{operaciones-2}{}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{det(matriz)}: para calcular el determinante de la matriz
+\item
+  \texttt{qr(matriz)\$rank}: para calcular el rango de la matriz
+\item
+  \texttt{solve(matriz)}: para calcular la inversa de una matriz
+  invertible
+
+  \begin{itemize}
+  \tightlist
+  \item
+    También sirve para resolver sistemas de ecuaciones lineales. Para
+    ello introducimos \texttt{solve(matriz,b)}, donde \(b\) es el vector
+    de términos independientes
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Valores y vectores propios}
+\protect\hypertarget{valores-y-vectores-propios}{}
+
+\href{https://es.wikipedia.org/wiki/Vector_propio_y_valor_propio}{Vector
+propio y valor propio}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{eigen(matriz)}: para calcular los valores (vaps) y vectores
+  propios (veps)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{eigen(matriz)\$values}: nos da el vector con los vaps de la
+    matriz en orden decreciente de su valor absoluto y repetidos tantas
+    veces como su multiplicidad algebraica.
+  \item
+    \texttt{eigen(matriz)\$vectors}: nos da una matriz cuyas columnas
+    son los veps de la matriz.
+  \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Valores y vectores propios}
+\protect\hypertarget{valores-y-vectores-propios-1}{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M =}\StringTok{ }\KeywordTok{rbind}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{6}\NormalTok{,}\OperatorTok{-}\DecValTok{8}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{6}\NormalTok{,}\OperatorTok{-}\DecValTok{3}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{))}
+\KeywordTok{eigen}\NormalTok{(M)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+eigen() decomposition
+$values
+[1] 4 3 2
+
+$vectors
+          [,1]       [,2] [,3]
+[1,] 0.2672612 -0.8164966    1
+[2,] 0.8017837  0.4082483    0
+[3,] 0.5345225  0.4082483    0
+\end{verbatim}
+
+\end{frame}
+
+\begin{frame}{Valores y vectores propios}
+\protect\hypertarget{valores-y-vectores-propios-2}{}
+
+\textbf{Ejercicio}
+
+Comprobad, con los datos del ejemplo anterior, que si \(P\) es la matriz
+de vectores propios de \(M\) en columna y \(D\) la matriz diagonal cuyas
+entradas son los valores propios de \(M\), entoces se cumple la
+siguiente igualdad llamada \textbf{descomposición canónica}:
+\[M = P\cdot D\cdot P^{-1}\]
+
+\includegraphics{Imgs/studytime.png}
+
+\end{frame}
+
+\begin{frame}[fragile]{Valores y vectores propios}
+\protect\hypertarget{valores-y-vectores-propios-3}{}
+
+Si hay algún vap con multiplicidad algebraica mayor que 1 (es decir, que
+aparece más de una vez), la función \texttt{eigen()} da tantos valores
+de este vap como su multiplicidad algebraica indica. Además, en este
+caso, R intenta que los veps asociados a cada uno de estos vaps sean
+\href{https://es.wikipedia.org/wiki/Dependencia_e_independencia_lineal}{linealmente
+independientes}. Por tanto, cuando como resultado obtenemos veps
+repetidos asociados a un vap de multiplicidad algebraica mayor que 1, es
+porque para este vap no existen tantos veps linealmente independientes
+como su multiplicidad algebraica y, por consiguiente, la matriz no es
+\href{https://es.wikipedia.org/wiki/Matriz_diagonalizable}{diagonalizable}.
+
+\end{frame}
+
+\begin{frame}[fragile]{Valores y vectores propios}
+\protect\hypertarget{valores-y-vectores-propios-4}{}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{M =}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\OperatorTok{-}\DecValTok{7}\NormalTok{,}\DecValTok{3}\NormalTok{,}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{16}\NormalTok{,}\OperatorTok{-}\DecValTok{3}\NormalTok{,}\DecValTok{4}\NormalTok{), }\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{, }\DataTypeTok{byrow=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{eigen}\NormalTok{(M)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+eigen() decomposition
+$values
+[1] 3 2 2
+
+$vectors
+           [,1]       [,2]       [,3]
+[1,] -0.1301889 -0.1825742 -0.1825742
+[2,] -0.3905667 -0.3651484 -0.3651484
+[3,]  0.9113224  0.9128709  0.9128709
+\end{verbatim}
+
+\end{frame}
+
+\end{document}

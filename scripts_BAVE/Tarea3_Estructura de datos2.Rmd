@@ -1,0 +1,85 @@
+---
+title: "Tarea3_Estructura de Datos2"
+author: "Brigido Vicuna"
+date: "7/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Preguntas de esta tarea
+
+##Cread un vector llamado "Harry" formado por la sucesión de números consecutivos entre el -10 y 27. Pedidle a R que os devuelva el elemento de índice 7. Escribid el resultado.
+
+```{r Pregunta 1}
+Harry = (-10:27)
+Harry[7]
+```
+
+
+## Dad el máximo de la sucesión (100*2^n -7*3^n) con n=0,...,200
+
+```{r Pregunta 2}
+sus = function(n){
+  100*(2^n) - 7*(3^n)
+}
+L = (0:200)
+
+suc = sapply(L, FUN = sus)
+
+maximo = max(sapply(L, FUN = sus))
+
+maximo
+
+
+```
+
+
+## Cread la sucesión de números consecutivos entre 0 y 40. A continuación, cread el vector (3*5^n - 1) con n=0,...,40. Ponedle como nombre x. Ahora, dad el subvector de los elementos que son estrictamente mayores que 3.5
+
+```{r Pregunta 3}
+S = (0:40)
+x = sapply(S, FUN = function(n){3*5^n-1})
+x
+which(x>3.5)
+```
+
+
+##Cread una función que os devuelva la parte real, la imaginaria, el módulo, el argumento y el conjugado de un número, mostrando solo 2 cifras significativas
+
+```{r}
+complex_num = function(z){
+  print(Re(z))
+  print(Im(z)) 
+  print(round(Mod(z),2))
+  print(round(Arg(z),2))
+  print(Conj(z))
+}
+
+z = 2+4i
+complex_num(z)
+
+```
+
+
+
+
+RECOMENDACIÓN: En algún momento os hará falta utilizar vectores
+
+Cread una función que resuelva ecuaciones de segundo grado (de la forma Ax^2+Bx+C=0). No importa, por ahora, que tengáis en cuenta las que no tienen solución
+
+RECOMENDACIÓN: En algún momento os hará falta utilizar vectores
+
+Tomando el vector vec = c(0,9,98,2,6,7,5,19,88,20,16,0), dad 3 opciones diferentes para calcular el subvector c(9,19,20,16)
+
+Tomando el vector vec definido en el apartado anterior, buscad
+
+    - qué entradas son pares
+
+    - qué entradas no son pares y mayores que 20
+
+    - dónde toma vec su valor máximo
+
+    - dónde toma vec sus valores mínimos

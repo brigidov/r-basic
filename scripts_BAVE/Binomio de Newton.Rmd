@@ -1,0 +1,103 @@
+---
+title: "Binomio de Newton"
+author: "Brigido Vicuna"
+date: "7/24/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Producto Notable
+
+La formula del producto notable es:
+
+$$(a+b)^2 = a^2 + 2*a*b + b^2$$
+
+# Funcion con R
+
+```{r}
+binomioNewton2 = function(a, b){
+a^2 + 2*a*b + b^2  
+}
+binomioNewton2(2,1)
+```
+# Binomio de Newton
+ 
+$$(a+b)^n = \sum_{k=0}^n {n\choose k}\cdot a^{n-k}\cdot b^k$$
+# Funcion con R
+
+```{r}
+binomioNewton = function(a,b,n){
+  cumsum(choose(n,(0:n))*a^{n-(0:n)}*b^(0:n))[n+1]
+}
+binomioNewton(2,1,2)
+binomioNewton(3,4,14)
+
+```
+
+```{r}
+a = matrix(0, nrow = 3, ncol = 5)
+a
+
+vec = c(1,2,3,4,5,6,7,8,9,10,11,12)
+mat_vec = matrix(vec, nrow = 3)
+mat_vec
+
+
+a = c(2,1,0,0,2,1,2,3,3)
+b = c(3,1,1,2,0,1,1,0,1)
+
+A = matrix(a, nrow = 3)
+B = matrix(b, nrow = 3)
+C = cbind(a,b)
+C
+
+D = A[1,]
+D
+
+A
+B
+prodAB = A%*%B
+prodAB
+prodBA = B%*%A
+prodBA
+
+CAbio = mtx.exp(A,2)
+CAbio
+CBbio = mtx.exp(B,2)
+CBbio
+
+CAex = expm(A,2)
+CAex
+CBex = B%%2
+CBex
+
+prodAA = A%*%A
+prodAA
+CAbio = mtx.exp(A,2)
+CAbio
+CAex = A%^%2
+CAex
+
+
+
+M = rbind(c(2,6,-8), c(0,6,-3), c(0,2,1))
+eigen(M)
+P = eigen(M)$vectors
+P
+D = diag(eigen(M)$values)
+D
+
+M2 = P%*%D%*%solve(P)
+M2
+M==M
+
+P
+M
+D
+
+?expm
+```
+
