@@ -1,0 +1,133 @@
+---
+title: "Ejercicios sobre LaTeX, R y Markdown"
+author: "Brigido Vicuna"
+date: "7/27/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Instrucciones
+En primer lugar, debéis reproducir este documento tal cual está. Necesitaréis instalar MiKTeX y Texmaker.
+
+A continuación de cada pregunta, tenéis que redactar vuestras respuestas de manera correcta y argumentada, indicando qué hacéis, por qué, etc. Si se os pide utilizar instrucciones de ```R```, tendréis que mostrarlas todas en chunks.
+
+El objetivo de esta tarea es que os familiaricéis con los documentos Markdown, las fórmulas en \LaTeX\ y los chunks de ```R```. Y, de lo más importante, que os acostumbréis a explicar lo que hacéis en cada momento.
+
+# Preguntas
+## Pregunta 1
+Realizad los siguientes productos de matrices siguiente en ```R```:
+
+$$A \cdot B$$
+$$B \cdot A$$
+$$\left ( A \cdot B \right )^{t}$$
+$$B^{t}\cdot A$$
+$$\left ( A \cdot B \right )^{-1}$$
+$$A^{-1} \cdot B^{t}$$
+donde
+$$A = \begin{pmatrix}
+1&  2&  3& 4\\ 
+4&  3&  2& 1\\ 
+0&  1&  0& 2\\ 
+3&  0&  4& 0
+\end{pmatrix}
+B = \begin{pmatrix}
+4&  3&  2& 1\\ 
+0&  3&  0& 4\\ 
+1&  2&  3& 4\\ 
+0&  1&  0& 2
+\end{pmatrix}$$
+
+Finalmente, escribe haciendo uso de \LaTeX\ el resultado de los dos primeros productos de forma adecuada.
+
+
+El resultado de $A \cdot B$ es:
+$$A\cdot B = \begin{pmatrix}
+1&  2&  3& 4\\ 
+4&  3&  2& 1\\ 
+0&  1&  0& 2\\ 
+3&  0&  4& 0
+\end{pmatrix}
+\cdot \begin{pmatrix}
+4&  3&  2& 1\\ 
+0&  3&  0& 4\\ 
+1&  2&  3& 4\\ 
+0&  1&  0& 2
+\end{pmatrix}=\begin{pmatrix}
+7&  19&  11& 29\\ 
+18&  26&  14& 26\\ 
+0&  5&  0& 8\\ 
+16&  17&  18& 29
+\end{pmatrix}$$
+
+```{r Pregunta 1.1, echo = FALSE, eval=FALSE}
+
+A = matrix(c(1,2,3,4,4,3,2,1,0,1,0,2,3,0,4,0), nrow = 4, byrow = TRUE)
+B = matrix(c(4,3,2,1,0,3,0,4,1,2,3,4,0,1,0,2), nrow = 4, byrow = TRUE)
+A%*%B
+
+```
+El resultado de $B \cdot A$ es:
+$$B\cdot A = \begin{pmatrix}
+4&  3&  2& 1\\ 
+0&  3&  0& 4\\ 
+1&  2&  3& 4\\ 
+0&  1&  0& 2
+\end{pmatrix}
+\cdot \begin{pmatrix}
+1&  2&  3& 4\\ 
+4&  3&  2& 1\\ 
+0&  1&  0& 2\\ 
+3&  0&  4& 0
+\end{pmatrix}=\begin{pmatrix}
+19&  19&  22& 23\\ 
+24&  9&  22& 3\\ 
+21&  11&  23& 12\\ 
+10&  3&  10& 1
+\end{pmatrix}$$
+```{r Pregunta1.2, echo = FALSE, eval=FALSE}
+B%*%A
+```
+
+## Pregunta 2
+Considerad en un vector los números de vuestro DNI y llamadlo ```dni```. Por ejemplo, si vuestro DNI es
+54201567K, vuestro vector será
+$$dni = (5,4,2,0,1,5,6,7)$$
+Definid el vector en ```R```. Calculad con ```R``` el vector ```dni``` al cuadrado, la raíz cuadrada del vector ```dni``` y, por último,
+la suma de todas las cifras del vector ```dni```.
+
+```{r Pregunta 2.1, eval = TRUE}
+dni = c(5,4,2,0,1,5,6,7) #Definicion del vector dni.
+
+dnicuad = dni^2 #Calculo del vector dni al cuadrado.
+dnicuad
+
+dnisqrt = sqrt(dni)#Calculo de las raiz cuadradad del vector dni.
+dnisqrt
+
+dnisum = sum(dni) #Suma de todos los elementos del vector dni.
+dnisum
+
+```
+
+
+Finalmente, escribid todos estos vectores también a \LaTeX
+
+$$dni = (5,4,2,0,1,5,6,7)$$
+
+$$dnicuad = (25,16,4,0,1,25,36,49)$$
+
+$$dnisqrt = (2.236068, 2.000000, 1.414214, 0.000000, 1.000000, 2.236068, 2.449490, 2.645751)$$
+
+$$dnisum = 30$$
+
+
+
+
+
+
+
+
+
+

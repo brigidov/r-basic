@@ -14,7 +14,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ##Cread un vector llamado "Harry" formado por la sucesión de números consecutivos entre el -10 y 27. Pedidle a R que os devuelva el elemento de índice 7. Escribid el resultado.
 
 ```{r Pregunta 1}
-Harry = (-10:27)
+Harry = (-10:27)# Esto es una sucecion, no un vector por definicion.
+# La forma correcta del vectore seria Harry = c(-10:27).
+Harry
 Harry[7]
 ```
 
@@ -22,13 +24,17 @@ Harry[7]
 ## Dad el máximo de la sucesión (100*2^n -7*3^n) con n=0,...,200
 
 ```{r Pregunta 2}
-sus = function(n){
+# Definicion de la funcion fsuc para aplicarla a las sucesion.
+fsuc = function(n){
   100*(2^n) - 7*(3^n)
 }
+# Sucecion desde 0 hasta 200.
 L = (0:200)
 
-suc = sapply(L, FUN = sus)
+# Aplicacion de la funcion fsuc al vector L.
+suc = sapply(L, FUN = fsuc)
 
+# Maximo valor de la sucecion.
 maximo = max(sapply(L, FUN = sus))
 
 maximo
