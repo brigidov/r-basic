@@ -1,0 +1,80 @@
+---
+title: "Tare 8 - Manejando DF en R"
+author: "Brigido Vicuna"
+date: "8/14/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Carga en R o en Python el CSV de la web http://winterolympicsmedals.com/medals.csv y responde a las preguntas de la tarea.
+
+```{r}
+read.csv("http://winterolympicsmedals.com/medals.csv", header = TRUE, stringsAsFactors = FALSE) -> df
+head(df)
+df[,9] = c(1:2311)
+
+head(df)
+```
+
+```{r}
+str(df)
+
+```
+
+
+
+
+
+
+
+Questions for this assignment
+¿Cuantos deportistas aparecen en el data frame?
+
+```{r}
+str(df)
+```
+
+
+¿Cuantos han ganado medallas de oro, cuantos de plata y cuantos de bronce?
+
+```{r}
+attach(df)
+gold = sum(df$Medal=="Gold")
+silver = sum(df$Medal=="Silver")
+bronze = sum(df$Medal=="Bronze")
+gold
+silver
+bronze
+
+total = gold+silver+bronze
+total
+```
+
+
+¿En cuantos lugares se han hecho olimpiadas de invierno?
+
+```{r}
+
+```
+
+
+
+¿Cuantos hombres y cuantas mujeres hay?
+```{r}
+x = sum(df$Event.gender== "X")
+
+
+men = sum(df$Event.gender== "M") + x/2
+men
+
+women = sum(df$Event.gender== "W")+ x/2
+women
+```
+
+
+¿En qué año participaron más deportistas?
+
+El campo NOC indica el país del ganador de la medalla. ¿Qué país puede presumir de haber ganado más medallas de oro en los juegos de invierno entre 1960 y 1996?

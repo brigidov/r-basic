@@ -1,0 +1,55 @@
+---
+title: "Carga de Ficheros"
+author: "Brigido Vicuna"
+date: "8/13/2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Carga de Ficheros Local
+
+```{r}
+df = read.table("../data/bulls.dat",
+                header = FALSE,
+                col.names = c("breed", "sale_price", "shoulder", 
+                              "fat_free", "percent_ff","frame_scale",
+                              "back_fat","sale_height", "sale_weight"),
+                sep = "",
+                dec = ".")
+
+head(df)
+df
+```
+```{r}
+facies = read.csv("C:/Users/brigi/Desktop/facies.txt")
+facies
+```
+```{r}
+genero = c("hombre", "mujer", "hombre", "mujer")
+edad = c(32,54,32,75)
+nro_hijo = c(2,4,1,3)
+
+df2 = data.frame(gen = genero, age = edad, hijos = nro_hijo, stringsAsFactors = FALSE)
+
+head(df2,1)
+tail(df2,1)
+str(df2)
+names(df2)
+rownames(df2)= c("p1","p2","p3","p4")
+colnames(df2)
+dimnames(df2)
+nrow(df2)
+ncol(df2)
+dim(df2)
+
+df2$gen
+
+
+df2[2:3,2:3]
+```
+
