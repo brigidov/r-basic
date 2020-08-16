@@ -2,7 +2,9 @@
 title: "Tare 8 - Manejando DF en R"
 author: "Brigido Vicuna"
 date: "8/14/2020"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -12,29 +14,20 @@ knitr::opts_chunk$set(echo = TRUE)
 Carga en R o en Python el CSV de la web http://winterolympicsmedals.com/medals.csv y responde a las preguntas de la tarea.
 
 ```{r}
-read.csv("http://winterolympicsmedals.com/medals.csv", header = TRUE, stringsAsFactors = FALSE) -> df
-head(df)
-df[,9] = c(1:2311)
-
-head(df)
+read.csv("http://winterolympicsmedals.com/medals.csv", header = TRUE, stringsAsFactors = TRUE) -> df
 ```
-
-```{r}
-str(df)
-
-```
-
-
-
-
-
-
-
 Questions for this assignment
 ¿Cuantos deportistas aparecen en el data frame?
 
 ```{r}
-str(df)
+df_Dep = aggregate(df$Medal, by = df["Year"], length)
+
+str(df_Dep)
+
+df_Dep =  df_Dep[with(df_Dep, order(-df_Dep$Year)), ]
+df_Dep
+sapply(df_Dep["x"],sum)
+
 ```
 
 
@@ -57,7 +50,9 @@ total
 ¿En cuantos lugares se han hecho olimpiadas de invierno?
 
 ```{r}
-
+df_lug = aggregate(df$Medal=="Gold", by = df["City"], length)
+df_lug
+sapply(df_lug["City"],length)
 ```
 
 
@@ -67,14 +62,36 @@ total
 x = sum(df$Event.gender== "X")
 
 
-men = sum(df$Event.gender== "M") + x/2
+men = sum(df$Event.gender== "M")
 men
 
-women = sum(df$Event.gender== "W")+ x/2
+women = sum(df$Event.gender== "W")
 women
 ```
 
 
 ¿En qué año participaron más deportistas?
 
+```{r}
+df_MedalYear = aggregate(df$Medal, by = df["Year"], length)
+
+str(df_MedalYear)
+
+df_MedalYear =  df_MedalYear[with(df_MedalYear, order(-df_MedalYear$Year)), ]
+df_MedalYear
+sapply(df_MedalYear,max)
+
+```
+
 El campo NOC indica el país del ganador de la medalla. ¿Qué país puede presumir de haber ganado más medallas de oro en los juegos de invierno entre 1960 y 1996?
+
+```{r}
+df_MedalNOC = df[df$Year<=1996 & df$Year>=1960, ]
+tail(df_MedalNOC)
+df_MedalNOC = aggregate(df$Medal, by = df["NOC"], length)
+df_MedalNOC
+df_MedalNOC = df_MedalNOC[with(df_MedalNOC, order(-df_MedalNOC$x)), ]
+df_MedalNOC
+
+```
+
