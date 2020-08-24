@@ -15,6 +15,8 @@ Carga en R o en Python el CSV de la web http://winterolympicsmedals.com/medals.c
 
 ```{r}
 read.csv("http://winterolympicsmedals.com/medals.csv", header = TRUE, stringsAsFactors = TRUE) -> df
+summary(df)
+table(unlist(df$City))
 ```
 Questions for this assignment
 ¿Cuantos deportistas aparecen en el data frame?

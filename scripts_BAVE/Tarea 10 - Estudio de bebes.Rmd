@@ -1,0 +1,204 @@
+---
+title: "Tarea 10 - Estudio de bebes"
+author: "Brigido Vicuna"
+date: "8/21/2020"
+output: html_document
+---
+
+# Utiliza str() y head() para explorar la estructura, y con help(), mirar el significado de cada variable.
+
+```{r}
+library(MASS)
+str(birthwt)
+head(birthwt)
+```
+
+# Calcula una tabla de frecuencias relativas marginales de los pares (raza de la madre, peso inferior a 2.5 kg o no) que permita ver si la raza de la madre influye en el peso del bebé.
+
+## Transformacion del data frame
+
+```{r}
+df = birthwt
+head(df)
+
+df$low = factor(df$low, levels = 0:1, labels = c("Peso > 2.5 kg", "Peso < 2.5 kg"))
+
+df$smoke = factor(df$smoke, levels = 0:1, labels = c("No fuma", "Si fuma"))
+
+df$race = factor(df$race, levels = 1:3, labels = c("Blaca", "Negra", "Otras"))
+
+df$ptl = factor(df$ptl)
+
+df$ht = factor(df$ht, labels =c("Tension Normal", "Hipertencion") )
+
+df$ui = factor(df$ui, labels =c("No", "Si") )
+
+df$ftv = factor(df$ftv)
+
+str(df)
+```
+## Frcuencias Relativas Globales y Marginales
+```{r}
+raza = df$race
+peso_bajo = df$low
+
+prop.table(table(raza, peso_bajo))# Frecuancias relativa global.
+prop.table(table(raza, peso_bajo), 1)# Frecuancias relativa marginales por raza de la madre.
+prop.table(table(raza, peso_bajo), 2)# Frecuancias relativa marginales por peso del bebe.
+```
+
+
+
+# Dibuja un diagrama de mosaico de la tabla del ejercicio anterior.
+```{r fig.align= 'center'}
+mosaicplot(prop.table(table(raza, peso_bajo)), ylab = "Peso del bebe", xlab = "Raza", main = "Grafico de mosaico del par\n Raza de la madre vs Peso < 2.5 kg", color = c("blue", "red"))
+```
+
+# Dibuja un diagrama bidimensional de barras, con las barras organizadas en bloques, que permita visualizar la información de los ejercicios anteriores. Aprovecha para nombres adecuados a los bloques, colores a las barras, y añadir una leyenda que explique qué representa cada barra.
+
+```{r fig.align='center'}
+barplot(prop.table(table(raza, peso_bajo)), beside = T, col = c("antiquewhite", "burlywood4", "chocolate1"), ylim = c(0,0.4), legend.text = T, xlab = "Peso del bebe", ylab = "Frecuencia Relativa Global por razas", main = "Grafico de barras del par\n Raza de la madre vs Peso < 2.5 kg")
+```
+
+# ¿Se puede obtener alguna conclusión de la tabla y el diagrama de barras anterior? Argumenta tu respuesta
+
+Con relacion a la raza de las madres, se tiene que los bebes nacidos de madres blancas representan la mayor frecuencia relativa absoluta de bebes con pesos > 2.5 kg, seguidos de bebes nacidos de madres de otras razas y por ultimo bebes nacidos de madres negras.
+
+Al evaluar las frecuencias relativas por raza, las madres de raza blanca tienden a tener una mayor proporcion bebes con peso alto, seguido por otras razas y por ultimo la raza negra. viendose una mayor tendencia de bebes con bajo peso entre madres de raza negra seguido por madres de otras razas y madres blanca con la menor proporcion.
+
+Finalmente, del total de bebes con peso > a 2.5 kg, se tiene que la mayor proporcion pertence a madres blancas, seguido de otras razas y con menor proporcion en la raza negra. De igual manera, entre el total de bebes con peso bajo, la mayor proporcion proviene de madres de otras razas, seguido por madres de raza blanca y la menor proporcion representada por madres de raza negra.
+
+# Repite los cuatro ejercicios anteriores para los pares (madre fumadora o no, peso inferior a 2.5 kg o no) y para los pares (madre hipertensa o no, peso inferior a 2.5 kg o no.
+
+## Madre fumadora vs Peso inferior a 2.5 kg.
+
+### Frcuencias Relativas Globales y Marginales.
+
+```{r}
+fuma = df$smoke
+peso_bajo = df$low
+
+prop.table(table(fuma, peso_bajo))# Frecuancias relativa global.
+prop.table(table(fuma, peso_bajo), 1)# Frecuancias relativa marginales por habito de fumar.
+prop.table(table(fuma, peso_bajo), 2)# Frecuancias relativa marginales por peso del bebe.
+```
+### Grafico de Mosaico
+
+```{r fig.align='center'}
+mosaicplot(prop.table(table(fuma, peso_bajo)), ylab = "Peso", xlab = "Madre", main = "Grafico de mosaico del par\n Madre fumadora vs Peso del bebe", color = c("blue", "red"))
+```
+
+### Grafico de Barras.
+
+```{r fig.align='center'}
+
+par(mfrow = c(1,3), fin= c(6,4))
+
+barplot(prop.table(table(fuma, peso_bajo)), beside = T, col = c("blue", "red"), ylim = c(0,0.5), legend.text = T, xlab = "Peso del bebe", main = "Frecuencia Relativa Global")
+
+barplot(t(prop.table(table(fuma, peso_bajo), margin = 1)), beside = T, col = c("blue", "red"), ylim = c(0,0.8), legend.text = T, xlab = "Habito de Fumar", main = "Frecuencia Relativa Marginal de madres")
+
+barplot(prop.table(table(fuma, peso_bajo), margin = 2), beside = T, col = c("blue", "red"), ylim = c(0,0.8), legend.text = T, xlab = "Peso del bebe", main = "Frecuencia Relativa Marginal de peso del bebe")
+```
+Respecto de los datos de frecuancia relativa global se tiene que:
+
+  * El 45.5% de los bebes tienen peso superior a 2.5 kg y pertenecen a aquellas madres que no fuman.
+  * El 23.2% de los bebes tienen peso superior a 2.5 kg y pertenecen a aquellas madres que si fuman.
+  * El 15.3% de los bebes tienen peso inferior a 2.5 kg y pertenecen a aquellas madres que no fuman.
+  * El 15.8% de los bebes tienen peso inferior a 2.5 kg y pertenecen a aquellas madres que si fuman.
+
+Evaluando las frecuencias relativas por habito de fumar se tiene que del total de madres que no fuman:
+  
+  * El 74.8% de los bebes tienen peso superior a 2.5 kg.
+  * El 25.2% de los bebes tienen peso inferior a 2.5 kg.
+
+Mientras que del total de madres que fumen:
+
+  * El 59.5% de los bebes tienen peso superior a 2.5 kg.
+  * El 40.5% de los bebes tienen peso inferior a 2.5 kg.
+  
+Finalmente, evaluando la proporcion de frecuencia por peso del bebe, se tiene que del total de bebes con peso superio a 2.5 kg:
+
+  * El 66.2% de los bebes pertenecen a madres que no fuman.
+  * El 33.8% de los bebes pertenecen a madres que fuman.
+
+Mientras que del total de bebes con pesos inferiores a 2.5 kg:
+
+  * El 49.2% de los bebes pertenecen a madres que no fuman.
+  * El 50.8% de los bebes pertenecen a madres que fuman.
+
+En conclusion, aquellas madres que no fuman tienden a tener bebes con pesos mayores a 2.5 kg mientras que el hecho de fumar eleva la proporcion de bebes con pesos bajos. Simultaneamente, de todos los casos de bebes con pesos bajos, la mayor proporcion esta relacionada a madres que fuman.
+
+
+### Madre hipertensa vs Peso inferior a 2.5 kg.
+
+### Frcuencias Relativas Globales y Marginales.
+```{r}
+hipertensa = df$ht
+peso_bajo = df$low
+
+prop.table(table(hipertensa, peso_bajo))# Frecuancias relativa global.
+prop.table(table(hipertensa, peso_bajo), 1)# Frecuancias relativa marginales por habito de fumar.
+prop.table(table(hipertensa, peso_bajo), 2)# Frecuancias relativa marginales por peso del bebe.
+```
+
+### Grafico de Mosaico
+
+```{r fig.align='center'}
+mosaicplot(prop.table(table(hipertensa, peso_bajo)), ylab = "Peso", xlab = "Madre", main = "Grafico de mosaico del par\n Madre hipertensa del bebe", color = c("blue", "red"))
+```
+
+### Grafico de Barras.
+
+```{r fig.align='center'}
+
+par(mfrow = c(1,3), fin= c(6,4))
+
+barplot(prop.table(table(hipertensa, peso_bajo)), beside = T, col = c("blue", "red"), ylim = c(0,0.7), legend.text = T, xlab = "Peso del bebe", main = "Frecuencia Relativa Global")
+
+barplot(t(prop.table(table(hipertensa, peso_bajo), margin = 1)), beside = T, col = c("blue", "red"), ylim = c(0,0.8), legend.text = T, xlab = "Historial de Tension Arterial", main = "Frecuencia Relativa Marginal de Tension Arterial")
+
+barplot(prop.table(table(hipertensa, peso_bajo), margin = 2), beside = T, col = c("blue", "red"), ylim = c(0,1), legend.text = T, xlab = "Peso del bebe", main = "Frecuencia Relativa Marginal de peso del bebe")
+```
+Respecto de los datos de frecuancia relativa global se tiene que:
+
+  * El 66.1% de los bebes tienen peso superior a 2.5 kg y pertenecen a aquellas madres con tension normal.
+  * El 2.6% de los bebes tienen peso superior a 2.5 kg y pertenecen a aquellas madres hipertensas.
+  * El 27.6% de los bebes tienen peso inferior a 2.5 kg y pertenecen a aquellas madres contension normal.
+  * El 3.7% de los bebes tienen peso inferior a 2.5 kg y pertenecen a aquellas madres hipertensas.
+
+
+Evaluando las frecuencias relativas por tension arterial se tiene que del total de madres con tension normal:
+
+  * El 70.6% de los bebes tienen peso superior a 2.5 kg.
+  * El 29.4% de los bebes tienen peso inferior a 2.5 kg.
+
+Mientras que del total de madres hipertensas:
+
+  * El 41.6% de los bebes tienen peso superior a 2.5 kg.
+  * El 58.4% de los bebes tienen peso inferior a 2.5 kg.
+  
+Finalmente, evaluando la proporcion de frecuencia por peso del bebe, se tiene que del total de bebes con peso superio a 2.5 kg:
+
+  * El 96.2% de los bebes pertenecen a madres con tension arterial normal.
+  * El 3.8% de los bebes pertenecen a madres hipertensas.
+
+Mientras que del total de bebes con pesos inferiores a 2.5 kg:
+
+  * El 88.1% de los bebes pertenecen a madres con tension normal.
+  * El 11.9% de los bebes pertenecen a madres hipertensas.
+
+En conclusion, aquellas madres con tension arterial  normal tienden a tener bebes con pesos mayores a 2.5 kg mientras que el sufrir hipertension eleva la proporcion de bebes con pesos bajos. 
+
+#Calcula una tabla de frecuencias relativas marginales de las ternas (raza de la madre, madre fumadora o no, peso inferior a 2.5 kg o no) que permita ver si la raza de la madre y su condición de fumadora o no fumadora influyen en el peso del bebé.
+
+```{r}
+prop.table(table(raza, fuma, peso_bajo))
+```
+# Dibuja un diagrama de mosaico de la tabla del ejercicio anterior.
+
+```{r fig.align='center'}
+mosaicplot(prop.table(table(raza, fuma, peso_bajo)), color = c("blue", "red"), off = 30, main = "Grafico de Mosaico\n Raza, Fuma, Peso del bebe", xlab = "Raza de la madre")
+```
+
+

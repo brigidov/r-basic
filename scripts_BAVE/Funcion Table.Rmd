@@ -1,0 +1,230 @@
+---
+title: "Funcion Table"
+author: "Brigido Vicuna"
+date: "8/19/2020"
+output: html_document
+---
+
+Table
+```{r}
+genero2 = c(rep("Mujer", 12),rep("Hombre", 6))
+genero2
+table(genero2)#Frecuencias Absolutas
+
+prop.table(table(genero2))# Frecuencias Relativas
+table(genero2)/length(genero2)# Frecuencias Relativas
+
+names(which(table(genero2)==max(table(genero2))))#Moda
+```
+```{r}
+respuestas = sample(c("Si","No"), 18, replace = T)
+
+table(respuestas, genero2)
+table(genero2, respuestas)
+
+t(table(respuestas, genero2))
+```
+```{r}
+table(respuestas, genero2)["No", "Hombre"]
+table(respuestas, genero2)[1, 1]
+```
+
+Prop.Table
+```{r}
+prop.table(table(respuestas, genero2)) #Frecuencia Relativa Global
+
+prop.table(table(respuestas, genero2),margin = 1)#Por Respuestas. 1 : repuestas. Por filas suma uno.
+
+prop.table(table(respuestas, genero2),margin = 2)#Por genero2. 2 : genero2. Por columnas suma uno.
+```
+CrossTable
+
+Paquete gmodels
+```{r}
+library(gmodels)
+CrossTable(genero2, respuestas, prop.chisq = FALSE  )
+```
+Tablas Mutidimensionales
+
+ejemplo con 3 dimensiones
+```{r}
+ans = sample(c("Si","No"), size = 100, replace = TRUE)
+
+sex = sample(c("H","M"), size = 100, replace = TRUE)
+
+place =sample(c("San Francisco","Barceloma","Valencia", "Cobija", "Asturias"), size = 100, replace = TRUE)
+
+table(sex, ans, place)
+
+ftable(sex, ans, place)
+
+ftable(sex, ans, place, col.vars = c(
+  "sex", "ans"
+))
+```
+
+filtrar tablas
+```{r}
+table(sex, ans, place)["M", "Si", "San Francisco"]
+
+table(sex, ans, place)[ , "Si", "Valencia"]
+
+table(sex, ans, place)[, "No", ]
+
+table(sex, ans, place)["M", , "Cobija"]
+```
+Frecuancias Relativas
+```{r}
+prop.table(table(sex, ans, place))#Frec. Rel Globales
+
+prop.table(table(sex, ans, place), margin = 3) #Frec. Rel. Marginal por lugar
+
+prop.table(table(sex, ans, place), margin = c(1,3))#Frec. Rel. Marginal por sexo y lugar
+```
+Ejemplo de color de ojos y pelo
+```{r}
+HairEyeColor
+
+sum(HairEyeColor)
+
+prop.table(HairEyeColor, margin = 3)
+
+prop.table(HairEyeColor, margin = c(1,2))
+```
+```{r}
+aperm(HairEyeColor, perm = c("Sex", "Hair", "Eye"))
+```
+```{r}
+library(kableExtra)
+
+kable(HairEyeColor)
+```
+Tablas a partir de DataFrames
+```{r}
+Beb_Energ = read.table("../data/EnergyDrink", header = TRUE)
+head(Beb_Energ)
+str(Beb_Energ)
+
+summary(Beb_Energ)
+
+apply(Beb_Energ, MARGIN = 2, FUN = table)
+```
+```{r}
+apply(Beb_Energ, MARGIN = 2, FUN = table)$sexo
+```
+```{r}
+table(Beb_Energ$sexo)
+```
+```{r}
+table(Beb_Energ)
+```
+
+```{r}
+table(Beb_Energ[c(1,3)])
+```
+```{r}
+ftable(Beb_Energ)
+```
+Diagrama de Baras
+
+```{r}
+barplot(table(genero2), col = c("blue","red"), main = "Diagrama de las frecuencuas absolutas\n de la variable\"Sexo\"")
+```
+
+```{r}
+barplot(prop.table(table(genero2)),main = "Diagrama de las frecuencuas relativas\n de la variable\"Sexo\"")
+```
+```{r}
+par(mfrow = c(1,2))
+barplot(table(genero2), col = c("blue","red"), main = "Diagrama de las frecuencuas absolutas\n de la variable\"Sexo\"")
+barplot(prop.table(table(genero2)),main = "Diagrama de las frecuencuas relativas\n de la variable\"Sexo\"")
+```
+```{r}
+barplot(table(genero2), horiz = TRUE)
+```
+```{r}
+barplot(table(respuestas, genero2), legend.text = T)
+```
+```{r}
+barplot(table(respuestas, genero2),beside =  T, legend.text = T)
+```
+Diagrama Circular
+
+```{r}
+bolas = sample(c(1:5),12, replace = T)
+pie(table(bolas), main = "Diagrama circular de la variable bolas")
+```
+Grafico de Mosaico
+```{r}
+mosaicplot(table(genero2, respuestas), main = "Grafico de mosaico de las variables genero2 y respuestas")
+```
+Ejemplo Final
+
+Juntar color de ojos y pelos sin distinguir por sexo.
+```{r}
+HairEyeColor
+
+male = HairEyeColor[, ,"Male"]
+male
+
+female = HairEyeColor[, ,"Female"]
+female
+
+data = as.table(male+female)
+data
+dimnames(data)
+```
+Cambiar nombres de las variables
+```{r}
+dimnames(data) = list(
+  Pelo = c("Negro", "Marron", "Pelirrojo", "Rubio"),
+  Ojos = c("Marrones", "Azules", "Pardos", "Verdes")
+)
+
+dimnames(data)
+```
+
+Diagrama de Mosaico
+```{r}
+mosaicplot(data, main = "Grafico de mosaico de las variables Ojos y Pelo", color = "blue")
+```
+Numero total de individuos representados en la tabla
+```{r}
+sum(data)
+```
+Tabla de frecuancia absoluta y relativa de cada una de las variables
+
+```{r}
+library(gmodels)
+CrossTable(data, prop.chisq = FALSE  )
+data
+
+colSums(data)
+rowSums(data)
+prop.table(colSums(data))
+prop.table(rowSums(data))
+```
+
+Grafico de barras de frecuencias relativas de ojos y cabello
+```{r}
+barplot((prop.table(colSums(data))),col = c("burlywood4","lightblue","orange","darkseagreen1"), main = "Frecuencias relativas de colores de ojos", ylim = c(0,0.4))
+
+barplot((prop.table(rowSums(data))),col = c("black","chocolate4","red","darkgoldenrod1"), main = "Frecuencias relativas de colores de cabello", ylim = c(0,0.5))
+```
+Frecuencia relativas globales y marginales
+```{r}
+prop.table(data)#frecuencia relativa global
+
+prop.table(data, margin = 1)#frecuencia relativa por color de pelo
+prop.table(data, margin = 2)#frecuencia relativa por color de ojos
+
+
+```
+graficos de Frecuencias relativas marginales
+
+```{r}
+barplot(prop.table(data,margin = 1),col = c("black","chocolate4","red","darkgoldenrod1"), main = "Frecuencias relativas de color de pelo\n por color de ojos", ylim = c(0,0.8), beside = T, legend.text = T)
+
+barplot(t(prop.table(data,margin = 2)),col = c("burlywood4","lightblue","orange","darkseagreen1"), main = "Frecuencias relativas de color de ojos\n por color de cabello", ylim = c(0,0.8), beside = T, legend.text = T)
+```
+

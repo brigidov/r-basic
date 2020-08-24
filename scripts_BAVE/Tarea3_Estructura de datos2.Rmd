@@ -65,6 +65,8 @@ complex_num = function(z){
 z = 2+4i
 complex_num(z)
 
+#Respuesta del Profesor
+info = function(x){print(c(Re(x),lm(x),Mod(x),Arg(x),Conj(x)),2)}
 ```
 # RECOMENDACIÓN: En algún momento os hará falta utilizar vectores
 
@@ -82,6 +84,10 @@ sol = function(a,b,c){
   print(paste(sprintf('Solucion 1= '),sol2 ))
 }
 sol(1,10,1)
+
+#Respuesta del Profesor
+
+Respuesta = function(a,b,c){c((-b +sqtr(b^2-4*a*c)/(2/a)),(-b-sqtr(b^2-4*a*c)/(2*a)))}
 ```
 
 
