@@ -1,0 +1,33 @@
+---
+title: "Datos Cuantitativos"
+author: "Brigido Vicuna"
+date: "8/25/2020"
+output: html_document
+---
+
+```{r}
+set.seed(162017)
+dados = sample(1:6,25, replace = T)
+dados
+```
+```{r}
+set.seed(NULL)
+```
+
+```{r}
+table(dados)
+prop.table(table(dados))
+cumsum(table(dados))
+cumsum(prop.table(table(dados)))
+```
+
+```{r}
+dados.df = data.frame(Puntuacion = 1:6,
+                      Fr.abs = as.vector(table(dados)),
+                      Fr.rel = as.vector(round(prop.table(table(dados)),2)),
+                      Fr.acu = as.vector(cumsum(table(dados))),
+                      Fr.racu = as.vector(round(cumsum(prop.table(table(dados))),2)))
+
+dados.df
+```
+

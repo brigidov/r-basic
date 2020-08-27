@@ -1,0 +1,50 @@
+---
+title: "Tarea12"
+author: "Brigido Vicuna"
+date: "8/26/2020"
+output: html_document
+---
+```{r}
+grades = read.table("../data/grades.txt", header = TRUE)
+head(grades)
+str(grades)
+```
+# Calcula la media, la mediana y la moda redondeada a dos cifras decimales de las notas numéricas de los exámenes tanto de forma conjunta como por estudio universitario. ¿En qué grupo observamos la nota más alta? ¿Qué grupo está por encima de la media de estudiantes?
+
+```{r}
+#Forma conjunta
+media.conj = round(mean(grades$nota),3)
+media.conj
+mediana.conj = round(median(grades$nota),3)
+mediana.conj
+moda.conj = round(as.numeric(names(which(table(grades$nota)==max(table(grades$nota))))),2)
+moda.conj
+
+# Por estudio
+
+moda = function(x){
+  as.numeric(names(which(table(x)==max(table(x)))))
+}
+
+media.estudio = by(grades$nota, grades$estudio, FUN = mean)
+media.estudio
+mediana.estudio = by(grades$nota, grades$estudio, FUN = median)
+mediana.estudio
+moda.estudio = by(grades$nota, grades$estudio, FUN = moda)
+moda.estudio
+
+rango = by(grades$nota, grades$estudio, FUN = range)
+rango
+```
+
+# ¿En qué grupo observamos más variación de notas? Justifica tu respuesta
+
+```{r}
+dispersion = function(x){
+  c(range(x), diff(range(x)), IQR(x), var(x)*(length(x)-1)/length(x), sd(x)*sqrt((length(x)-1)/length(x)))
+}
+by(grades$nota, grades$estudio, FUN = dispersion)
+boxplot(nota~estudio, data = grades)
+
+```
+
