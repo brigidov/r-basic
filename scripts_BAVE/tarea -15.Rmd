@@ -1,0 +1,180 @@
+---
+title: "Tarea 15 - Distribuciones de Probabilidad"
+author: "Brigido Vicuna"
+date: "9/18/2020"
+output: html_document
+---
+
+En una universidad, se sabe que el 25% de los alumnos realizan algún tipo de deporte. Se ha obtenido una muestra de 30 alumnos.
+
+a) Si llamamos X a la variable aleatoria que cuenta el número de alumnos que realizan algún tipo de deporte, ¿qué tipo de distribución sigue X?
+X sigue una distribuvion binomial.
+
+b) ¿Qué esperanza tiene X?
+```{r}
+n = 30
+p = 0.25
+E = n*p
+E
+
+```
+
+c) ¿Y varianza?
+```{r}
+Var = n*p*(1-p)
+Var
+```
+
+d) Calcula con R (o Python) la probabilidad de que más de 25 alumnos practiquen algún deporte.
+
+```{r}
+result = sum(dbinom(26:30,n,p))
+format(result, scientific = F)
+```
+
+
+e) Calcula con R (o Python) la probabilidad de que exactamente 15 alumnos practiquen algún deporte.
+
+```{r}
+result2 = dbinom(15,n,p)
+format(result2,scientific = F)
+```
+
+
+f) Calcula con R (o Python) la probabilidad de que de 10 alumnos o menos practiquen algún deporte.
+
+```{r}
+result3 = sum(dbinom(0:10,n,p))
+format(result3,scientific = F)
+```
+
+El número medio de accidentes de coche en la ciudad de Mahón en 2 meses es de 2 accidentes.
+
+a) ¿Qué distribución sigue la v.a. que cuenta el número de accidentes en 2 meses?
+
+La v.a sigue la distribucion de Poisson.
+
+b) Calcula la esperanza
+```{r}
+l = 2
+```
+
+
+c) Calcula con R (o Python) la probabilidad de que no ocurra ningún accidente en 2 meses.
+```{r}
+format(dpois(0, l), scientific = F)
+```
+
+El 40% de un pueblo a las afueras de la ciudad de Pensilvania ve un concurso que dan por la tele. El concurso llama por teléfono a 15 personas del pueblo elegidas al azar. ¿De qué distribución se trata?
+
+La v.a sigue una distribucion hipergeometrica.
+
+En un bol muy grande tenemos, en total, 70 fresas, de entre las cuales 10 están podridas. Tomando un puñado de 20 fresas al azar y sin reemplazar ninguna de ellas, ¿qué distribución sigue la v.a. que cuenta el número de fresas podridas?
+
+La v.a sigue una distribucion hipergeometrica.
+
+
+Da también la esperanza y la varianza de esta variable aleatoria.
+
+```{r}
+M = 60
+N = 10
+k = 20
+
+E = (k*M)/(M+N)
+E 
+```
+
+Un test de matemáticas consta de 200 preguntas de verdadero o falso. Para una persona que respondiese al azar, ¿qué distribución seguiría la v.a. que cuenta el número de preguntas acertadas?
+
+La v.a seguiria una distribucion binomial.
+
+Da también la esperanza y la varianza de esta variable aleatoria.
+
+```{r}
+n = 200
+p = 0.5
+q = 0.5
+
+E = n*p
+E
+
+Var = n*p*q
+Var
+```
+Un test de matemáticas consta de 200 preguntas. Cada pregunta consta de 4 posibles respuestas con solo una correcta. Para una persona que respondiese al azar, ¿qué distribución seguiría la v.a. que cuenta el número de preguntas acertadas?
+
+La v.a seguiria una distribucion binomial.
+
+Da también la esperanza y la varianza de esta variable aleatoria.
+
+```{r}
+n = 200
+p = 0.25
+q = 0.75
+
+E = n*p
+E
+
+Var = n*p*q
+Var
+```
+Un test de matemáticas consta de 200 preguntas de verdadero o falso. Para una persona que respondiese al azar y por orden, ¿qué distribución seguiría la v.a. que cuenta el número de preguntas respondidas hasta el primer acierto?
+
+La v.a seguiria una distribucion geometrica.
+
+Da también la esperanza y la varianza de esta variable aleatoria.
+```{r}
+n = 200
+p = 0.5
+q = 0.5
+
+E = (1-p)/p
+E
+
+Var = (1-p)/p^2
+Var
+```
+
+Para evitar ser arrestado al pasar el control de seguridad, un viajero ha colocado 7 pastillas de droga en una botella que contiene 14 píldoras de vitaminas, las cuales son muy similares a las otras. Si el policía de turno selecciona 4 pastillas aleatoriamente para analizarlas, ¿qué distribución sigue la v.a. que cuenta el número de pastillas de droga?
+
+La v.a sigue una distribucion hipergeometrica.
+
+Un servicio dedicado a la reparación de aires acondicionados recibe de media 27 llamadas diarias. ¿Qué distribución sigue la v.a. que cuenta el número de llamadas diarias?
+
+La v.a sigue una distribucion de Poisson.
+
+Se lanza 53 veces un dado. ¿Qué distribución sigue la v.a. que cuenta cuántas veces ha salido un número impar? 
+La v.a sigue una distribucion Binomial.
+
+¿Y la v.a. que cuenta el número de veces que ha salido un número par? 
+La v.a sigue una distribucion Binomial.
+
+¿Y la v.a. que cuenta las veces que hemos obtenido exactamente el número "5"?
+La v.a sigue una distribucion Binomial.
+
+El precio medio del litro de gasolina durante el próximo año se estima que puede oscilar entre 1.09€ y 2.53€. ¿De qué distribución de probabilidad se trata?
+
+distribucion uniforme
+
+Da la esperanza
+```{r}
+a = 1.09
+b = 2.53
+E = (a+b)/2
+E
+```
+En una tienda del centro comercial, el tiempo medio de cola para poder pagar en caja es de 7 minutos. ¿De qué distribución de probabilidad se trata?
+
+Distribucion exponencial
+
+Da la esperanza y varianza
+
+```{r}
+l = 7
+E = 1/l
+E
+Var = 1/l^2
+Var
+```
+

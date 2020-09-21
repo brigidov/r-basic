@@ -1,0 +1,137 @@
+---
+title: "Tarea 13 - Reglas de Agrupacion en datos Numericos"
+author: "Brigido Vicuna"
+date: "9/2/2020"
+output: html_document
+---
+```{r}
+crabs = read.table("../data/datacrab.txt", header = TRUE)
+str(crabs)
+head(crabs)
+```
+
+```{r}
+cw = crabs$width
+```
+
+
+# Da el algoritmo para reproducir el proceso de generación de clases y sus marcas respectivo para el número de clases obtenido con la regla de la raíz en R o en Python.
+
+## Calculo del numero de clases por regla de raiz cuadrada.
+```{r}
+n = length(cw)
+k1 = ceiling(sqrt(n))
+k1
+```
+
+## Calculo de la amplitud de los intervalos.
+
+```{r}
+A = diff(range(cw))/k1
+A
+```
+```{r}
+A = 0.9
+```
+
+## Calculo de los extremos de los intervalos.
+
+```{r}
+L1 = min(cw)-1/2*0.1
+L1
+L = L1+A*(0:k1)
+L
+```
+
+## Calculo de las marcas de clase.
+
+```{r}
+X1 = (L[1]+L[2])/2
+X1
+X = X1+A*(0:(k1-1))
+X
+```
+
+## Calculo del numero de clases por regla de raiz cuadrada en Python.
+```{r}
+library(reticulate)
+```
+
+
+
+# Da el algoritmo para reproducir el proceso de generación de clases y sus marcas respectivo para el número de clases obtenido con la regla de la Sturges en R o en Python
+
+## Calculo del numero de clases por regla de Sturges.
+```{r}
+k1 = nclass.Sturges(cw)
+k1
+```
+
+## Calculo de la amplitud de los intervalos.
+
+```{r}
+A = diff(range(cw))/k1
+A
+```
+
+```{r}
+A = 1.4
+```
+
+## Calculo de los extremos de los intervalos.
+
+```{r}
+L1 = min(cw)-1/2*0.1
+L1
+L = L1+A*(0:k1)
+L
+```
+
+## Calculo de las amrcas de clase.
+
+```{r}
+X1 = (L[1]+L[2])/2
+X1
+X = X1+A*(0:(k1-1))
+X
+```
+
+
+# Da el algoritmo para reproducir el proceso de generación de clases y sus marcas respectivo para el número de clases obtenido con la regla de la  Freedman-Diaconis en R o en Python.
+
+## Calculo del numero de clases por regla de Sturges.
+```{r}
+k1 = nclass.FD(cw)
+k1
+```
+
+## Calculo de la amplitud de los intervalos.
+
+```{r}
+A = diff(range(cw))/k1
+A
+```
+
+```{r}
+A = 1
+```
+
+## Calculo de los extremos de los intervalos.
+
+```{r}
+L1 = min(cw)-1/2*0.1
+L1
+L = L1+A*(0:k1)
+L
+```
+
+## Calculo de las marcas de clase.
+
+```{r}
+X1 = (L[1]+L[2])/2
+X1
+X = X1+A*(0:(k1-1))
+X
+```
+
+

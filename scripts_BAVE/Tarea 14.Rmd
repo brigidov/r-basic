@@ -1,0 +1,135 @@
+---
+title: "Tarea 14 - Distribucion Normal"
+author: "Brigido Vicuna"
+date: "9/15/2020"
+output: html_document
+---
+
+La cantidad de tiempo (en horas) utilizada para completar un producto determinado sigue una distribución N(10, 2) . Calculad la probabilidad de que se tarde:
+a) Menos de 6 horas
+
+b) Entre 7 y 13 horas
+
+Estandarizad y luego calculad la probabilidad requerida mediante las tablas y comprobad vuestro resultado en R (o Python)
+
+```{r}
+m = 10
+sigma = 2
+
+round(pnorm(6, m, sigma)*100,2)
+#La probabilidad de que se tarde menos de 6 horas es 2.27%
+
+
+round(pnorm(13, m, sigma)*100 - pnorm(7, 10, 2)*100,2)
+#La probabilidad de que se tarde entre 7 y 13 horas es 86.63%
+
+
+```
+
+```{r}
+#Estandarizacion para menos de 6 horas.
+z = (6-m)/sigma
+z
+
+#Para z = 2, la probabilidad es 2.28%
+
+#Estandarizacion entre 7 y 13 horas.
+z = (7-m)/sigma
+z
+z = (13-m)/sigma
+z
+
+#Para z = 1.5, la probabilidad es 93.32% mientras que apra z = -1.5 la probabilidad es 6.68%.
+#Por lo tanto, la probabilidad para z<= 1.5 - z<= -1.5 es 93.32 - 6.68.
+
+p_7_13 = 93.32 - 6.68
+p_7_13
+
+```
+
+El valor (en millones) de las ventas anuales realizadas en la Discográfica "Hasta quedarnos sin tímpanos" sigue un modelo normal de media igual a 200 y desviación tíıpica igual a 40.
+
+a) Calcula la probabilidad de que el número de ventas sea exactamente igual a 200 (millones)
+
+b) Calcula la probabilidad de que el número de ventas sea mayor que 250 (millones)
+
+c) Calcula la probabilidad de que el número de ventas sea menor o igual que 100 (millones)
+
+Estandarizad y luego calculad la probabilidad requerida mediante las tablas y comprobad vuestro resultado en R (o Python)
+
+```{r}
+m2 = 200000000
+sigma2 = 40000000
+
+#Ventas exactamente igual a 200 (millones)
+
+#La probabilidad es cero ya que se trata de una variable aleatoria continua.
+
+#Ventas mayor que 250 (millones)
+
+(1 - pnorm(250000000,m2,sigma2))*100
+
+#Ventas menor o igual que 100 (millones)
+
+pnorm(100000000,m2,sigma2)*100
+
+#Estandarizacion.
+
+#Ventas exactamente igual a 200 (millones)
+#La probabilidad es cero ya que se trata de una variable aleatoria continua.
+
+
+#Ventas mayor que 250 (millones)
+z = (250000000-m2)/sigma2
+z
+#Para z = 1.25 la probabilidad es 89.44%, por lo tanto la probabilidad de que el numero de ventas sea
+#mayor que 250 millones es 100% - 89.44%
+
+p = 100-89.44
+p
+
+#Ventas menor o igual que 100 (millones)
+z = (100000000-m2)/sigma2
+z
+#Para z = -2.5, la probabilidad es 0.62%
+```
+Las puntuaciones obtenidas en un examen tipo test realizado a un grupo de opositores se distribuyen normalmente con media 50 y desviación típica 6.5. Calculad
+
+a) Probabilidad de tener una puntuación menor a 23 puntos.
+
+b) Probabilidad de tener entre 27.3 y 43.1 puntos
+
+c) Probabilidad de tener más de 62 puntos
+
+d) Probabilidad de tener 3.2 puntos o menos
+
+e) Hallad el número de puntos que se deben obtener para que la probabilidad de sacar menos de esa cantidad de puntos sea de 0.045
+
+f) Repetid el apartado anterior, pero esta vez para obtener una probabilidad de 0.45
+
+Estandarizad y luego calculad la probabilidad requerida mediante las tablas y comprobad vuestro resultado en R (o Python)
+
+```{r}
+m3 = 50
+sigma3 = 6.5
+
+#a) Probabilidad de tener una puntuación menor a 23 puntos.
+pnorm(23,m3,sigma3)*100
+
+#b) Probabilidad de tener entre 27.3 y 43.1 puntos
+pnorm(43.1,m3,sigma3)*100 - pnorm(27.3,m3,sigma3)*100
+
+#c) Probabilidad de tener más de 62 puntos
+100 - pnorm(62,m3,sigma3)*100
+
+#d) Probabilidad de tener 3.2 puntos o menos
+pnorm(3.2,m3,sigma3)*100
+
+#e) Hallad el número de puntos que se deben obtener para que la probabilidad de sacar menos de esa cantidad de puntos sea de 0.045
+qnorm(0.045,m3,sigma3)
+
+#f) Repetid el apartado anterior, pero esta vez para obtener una probabilidad de 0.45
+qnorm(0.45,m3,sigma3)
+```
+
+
